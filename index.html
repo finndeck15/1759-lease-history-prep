@@ -3,151 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Change this to the browser tab title -->
-    <title>My Website</title>
-
+    <meta name="description" content="The story of Arthur Guinness's remarkable 9,000-year lease for St. James's Gate Brewery in Dublin.">
+    <title>The 9,000-Year Lease | St. James's Gate</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --ink: #181511;
+            --brown: #2b1d17;
+            --cream: #f5efe3;
+            --paper: #fffaf1;
+            --gold: #c89b4b;
+            --muted: #786f63;
+            --line: rgba(43, 29, 23, .16);
         }
 
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            min-height: 100vh;
-            color: white;
-            overflow-x: hidden;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: Georgia, 'Times New Roman', serif;
+            line-height: 1.6;
         }
+        a { color: inherit; }
 
-        
-        .background {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-
-            background-image: url("image.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-
-            
-            opacity: 0.65;
-        }
-
-        .overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.25);
-            z-index: -1;
-        }
-
-        /* White bar at the top */
-        .top-bar {
-            width: 100%;
-            height: 70px;
-            background: white;
-            display: flex;
-            align-items: center;
-            padding: 0 40px;
-            color: #222;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-        }
-
-        .top-bar h2 {
-            font-size: 22px;
-            font-weight: 600;
-        }
-
-        /* Main title section */
         .hero {
-            min-height: calc(100vh - 70px);
+            min-height: 92vh;
+            position: relative;
+            isolation: isolate;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            overflow: hidden;
+            color: var(--paper);
+            background:
+                linear-gradient(90deg, rgba(18, 12, 9, .88), rgba(18, 12, 9, .38)),
+                linear-gradient(0deg, rgba(18, 12, 9, .68), transparent 55%),
+                url('image.png') center / cover no-repeat;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: radial-gradient(circle at 75% 38%, rgba(200,155,75,.2), transparent 28%);
+            pointer-events: none;
+        }
+        .nav {
+            width: min(1120px, calc(100% - 48px));
+            margin: 0 auto;
+            padding: 28px 0;
+            display: flex;
             align-items: center;
-            text-align: center;
-            padding: 40px 20px;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,.22);
         }
-
-        .hero h1 {
-            font-size: clamp(45px, 8vw, 90px);
-            margin-bottom: 20px;
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: clamp(18px, 2.5vw, 28px);
-            max-width: 700px;
-            line-height: 1.5;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-        }
-
-        /* Optional button */
-        .button {
-            margin-top: 30px;
-            padding: 14px 30px;
-            background: white;
-            color: #222;
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center;
             text-decoration: none;
-            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .16em;
+            text-transform: uppercase;
+        }
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            color: var(--gold);
             font-size: 17px;
-            font-weight: bold;
-            transition: 0.2s;
         }
+        .nav-links { display: flex; gap: 28px; font: 600 12px Arial, sans-serif; letter-spacing: .1em; text-transform: uppercase; }
+        .nav-links a { text-decoration: none; opacity: .8; }
+        .nav-links a:hover { color: var(--gold); opacity: 1; }
+        .hero-content { width: min(1120px, calc(100% - 48px)); margin: auto; padding: 90px 0 120px; }
+        .eyebrow { color: var(--gold); font: 700 12px Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+        h1 { max-width: 760px; margin: 18px 0 22px; font-size: clamp(3.7rem, 9vw, 8.4rem); line-height: .9; font-weight: 400; letter-spacing: -.055em; }
+        .hero-intro { max-width: 560px; color: rgba(255,250,241,.82); font-size: clamp(1.1rem, 2vw, 1.35rem); }
+        .hero-cta { display: inline-flex; align-items: center; gap: 12px; margin-top: 34px; color: var(--paper); font: 700 12px Arial, sans-serif; letter-spacing: .16em; text-decoration: none; text-transform: uppercase; }
+        .hero-cta span { display: grid; place-items: center; width: 38px; height: 38px; border: 1px solid var(--gold); border-radius: 50%; color: var(--gold); font-size: 18px; transition: transform .2s; }
+        .hero-cta:hover span { transform: translateY(4px); }
+        .hero-foot { position: absolute; bottom: 28px; left: 50%; width: min(1120px, calc(100% - 48px)); transform: translateX(-50%); display: flex; justify-content: space-between; color: rgba(255,250,241,.62); font: 11px Arial, sans-serif; letter-spacing: .13em; text-transform: uppercase; }
 
-        .button:hover {
-            transform: translateY(-2px);
-            background: #eeeeee;
-        }
+        .section { width: min(1120px, calc(100% - 48px)); margin: 0 auto; padding: 120px 0; }
+        .section-label { margin-bottom: 26px; color: var(--gold); font: 700 11px Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+        .section h2 { max-width: 680px; margin-bottom: 22px; font-size: clamp(2.4rem, 5vw, 4.7rem); font-weight: 400; line-height: .98; letter-spacing: -.04em; }
+        .section-lead { max-width: 660px; color: var(--muted); font-size: 1.14rem; }
+        .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 62px; background: var(--line); border: 1px solid var(--line); }
+        .fact { min-height: 190px; padding: 30px; background: var(--paper); }
+        .fact strong { display: block; margin-bottom: 8px; color: var(--brown); font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 400; line-height: 1; }
+        .fact span { color: var(--muted); font: 700 11px Arial, sans-serif; letter-spacing: .14em; text-transform: uppercase; }
 
-        /* Mobile adjustments */
-        @media (max-width: 600px) {
-            .top-bar {
-                height: 60px;
-                padding: 0 20px;
-            }
+        .story-band { background: var(--brown); color: var(--paper); }
+        .story-band .section { display: grid; grid-template-columns: 1fr 1fr; gap: 90px; align-items: start; }
+        .story-band .section-label { color: var(--gold); }
+        .story-band h2 { color: var(--paper); }
+        .story-band p { color: rgba(255,250,241,.72); font-size: 1.08rem; }
+        .story-band p + p { margin-top: 18px; }
+        .quote { padding: 28px 0 28px 30px; border-left: 1px solid var(--gold); font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.12; }
+        .quote small { display: block; margin-top: 22px; color: var(--gold); font: 700 10px Arial, sans-serif; letter-spacing: .15em; text-transform: uppercase; }
 
-            .top-bar h2 {
-                font-size: 18px;
-            }
+        .timeline { position: relative; margin-top: 58px; padding-left: 28px; border-left: 1px solid var(--gold); }
+        .event { position: relative; padding: 0 0 42px 28px; }
+        .event:last-child { padding-bottom: 0; }
+        .event::before { content: ''; position: absolute; width: 9px; height: 9px; top: 8px; left: -33px; background: var(--gold); border-radius: 50%; box-shadow: 0 0 0 6px var(--cream); }
+        .event time { color: var(--gold); font: 700 12px Arial, sans-serif; letter-spacing: .16em; }
+        .event h3 { margin: 7px 0 5px; font-size: 1.5rem; font-weight: 400; }
+        .event p { max-width: 570px; color: var(--muted); }
 
-            .hero {
-                min-height: calc(100vh - 60px);
-            }
+        footer { padding: 34px 24px; background: #e9dfcf; color: var(--muted); text-align: center; font: 11px Arial, sans-serif; letter-spacing: .08em; }
+        footer a { color: var(--brown); }
+        @media (max-width: 700px) {
+            .nav-links { display: none; }
+            .hero-content { padding-top: 72px; }
+            .hero-foot { font-size: 9px; }
+            .hero-foot span:last-child { display: none; }
+            .facts, .story-band .section { grid-template-columns: 1fr; }
+            .facts { margin-top: 42px; }
+            .section { padding: 82px 0; }
+            .story-band .section { gap: 48px; }
         }
     </style>
 </head>
-
 <body>
-
-    <!-- Background -->
-    <div class="background"></div>
-    <div class="overlay"></div>
-
-    <!-- White top bar -->
-    <header class="top-bar">
-        <!-- CUSTOMISE THIS -->
-        <h2>My Website</h2>
+    <header class="hero" id="top">
+        <nav class="nav" aria-label="Main navigation">
+            <a class="brand" href="#top"><span class="brand-mark">✦</span> St. James's Gate</a>
+            <div class="nav-links"><a href="#lease">The lease</a><a href="#story">The story</a><a href="#legacy">Legacy</a></div>
+        </nav>
+        <div class="hero-content">
+            <p class="eyebrow">Dublin · 31 December 1759</p>
+            <h1>A lease built to last.</h1>
+            <p class="hero-intro">At St. James's Gate, Arthur Guinness signed one of the most famous property agreements in brewing history: 9,000 years for a Dublin brewery.</p>
+            <a class="hero-cta" href="#lease">Explore the agreement <span>↓</span></a>
+        </div>
+        <div class="hero-foot"><span>An Irish industrial story</span><span>Guinness · Since 1759</span></div>
     </header>
 
-    <!-- Main title page -->
-    <main class="hero">
+    <main>
+        <section class="section" id="lease">
+            <p class="section-label">The agreement</p>
+            <h2>Four acres. Forty-five pounds. Nine millennia.</h2>
+            <p class="section-lead">The lease gave Arthur Guinness a brewery site at St. James's Gate for an extraordinary term. Its scale and ambition have made it a lasting symbol of long-term thinking.</p>
+            <div class="facts" aria-label="Key lease facts">
+                <div class="fact"><strong>9,000</strong><span>Years on the lease</span></div>
+                <div class="fact"><strong>£45</strong><span>Annual rent</span></div>
+                <div class="fact"><strong>4 acres</strong><span>Site at St. James's Gate</span></div>
+            </div>
+        </section>
 
-        <!-- CUSTOMISE YOUR TITLE -->
-        <h1>Welcome</h1>
+        <section class="story-band" id="story">
+            <div class="section">
+                <div>
+                    <p class="section-label">A place in time</p>
+                    <h2>One signature changed the course of brewing.</h2>
+                    <p>On the last day of 1759, Arthur Guinness secured the St. James's Gate site in Dublin. The brewery was already there; the lease offered something rarer—a stable foundation on which to build.</p>
+                    <p>Over the centuries, the site grew from a local brewery into the home of a beer recognised around the world. The original terms became legend, but their practical promise was just as important: time, security and room to grow.</p>
+                </div>
+                <blockquote class="quote">“The famous lease is more than a number. It is a statement of confidence in a place and its future.”<small>St. James's Gate · Dublin</small></blockquote>
+            </div>
+        </section>
 
-        <!-- CUSTOMISE YOUR SUBTITLE -->
-        <p>
-            This is my website. Add your own description, information,
-            or anything else you want here.
-        </p>
-
-        <!-- OPTIONAL BUTTON -->
-        <a href="#content" class="button">Learn More</a>
-
+        <section class="section" id="legacy">
+            <p class="section-label">The long view</p>
+            <h2>From a Dublin address to a global legacy.</h2>
+            <p class="section-lead">The St. James's Gate lease remains one of the defining chapters in the story of Guinness—and a reminder that the most enduring ventures often begin with a bold commitment to place.</p>
+            <div class="timeline">
+                <article class="event"><time datetime="1759-12-31">31 DECEMBER 1759</time><h3>The lease is signed</h3><p>Arthur Guinness takes the St. James's Gate brewery site on a 9,000-year lease at an annual rent of £45.</p></article>
+                <article class="event"><time>THE SITE GROWS</time><h3>A brewery takes root</h3><p>The Dublin premises become the centre of an expanding brewing operation and an increasingly recognisable Irish brand.</p></article>
+                <article class="event"><time>TODAY</time><h3>The gate still stands</h3><p>St. James's Gate remains synonymous with Guinness and with one of the most remarkable leases ever signed.</p></article>
+            </div>
+        </section>
     </main>
 
+    <footer>Built around the story of the <a href="https://www.nli.ie/blog/index.php/2011/12/15/arthur-guinness-and-the-9000-year-lease/" target="_blank" rel="noopener">1759 St. James's Gate lease</a> · Dublin, Ireland</footer>
 </body>
 </html>
